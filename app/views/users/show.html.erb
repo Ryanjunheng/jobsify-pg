@@ -1,0 +1,50 @@
+<div class="container">
+	<h1>Welcome to <%= @user.name %>'s profile (<%= @user.role.capitalize %>)</h1>
+	<br>
+	<% if logged_in? %>
+		<%= link_to "Edit", edit_user_path(@user.id), class:"btn btn-default" %>
+	<% end %>
+	<hr>
+	<% if logged_in? %>
+		<% if @user.id == current_user.id %>
+			<h2>Your job posts:</h2>
+			<br>
+			<% if current_user.posts.size != 0 %>
+				<% @post.each do |post| %>	
+					<h4><%= link_to post.name, user_post_path(@user.id, post.id) %></h4>
+					<p>Created on: <%= post.date %></p>
+					<hr>
+				<% end %>
+				<p><%= paginate @post %></p>
+			<% else %>
+				<h4>You have no job post yet, <%= link_to "create one now!", new_user_post_path(current_user.id) %>
+			<% end %>
+		<% elsif @user.id != current_user.id %>
+			<h2><%= @user.name %>'s posts:</h2>
+			<br>
+			<% if @user.posts.size != 0 %>
+				<% @post.each do |post| %>	
+					<h4><%= link_to post.name, user_post_path(@user.id, post.id) %></h4>
+					<p>Created on: <%= post.date %></p>
+					<hr>
+				<% end %>
+				<p><%= paginate @post %></p>
+			<% else %>
+				<h4><%= @user.name %> has no job post yet</h4>
+			<% end %>
+		<% end %>
+	<% else %>
+		<h2><%= @user.name %>'s posts:</h2>
+		<br>
+		<% if @user.posts.size != 0 %>
+			<% @post.each do |post| %>	
+				<h4><%= link_to post.name, user_post_path(@user.id, post.id) %></h4>
+				<p>Created on: <%= post.date %></p>
+				<hr>
+			<% end %>
+			<p><%= paginate @post %></p>
+		<% else %>
+			<h4><%= @user.name %> has no job post yet</h4>
+		<% end %>
+	<% end %>
+</div>
