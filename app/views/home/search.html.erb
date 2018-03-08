@@ -16,6 +16,7 @@
 		<% @user.each do |user| %>
 			<li>
 				<h4><%= link_to user.name, user_path(user.id) %></h4>
+				<p>Role: <%= user.role %></p>
 			</li>
 		<% end %>
 		<% end %>
