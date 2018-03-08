@@ -11,7 +11,7 @@
 			<div class="col-md-12">
 				<h3><%= link_to post.name, user_post_path(post.user_id, post.id) %></h3>
 				<p>Created by: <%= link_to post.user.name, user_path(post.user.id) %> on <%= post.date %></p>			
-				<p>Description: <%= post.description %></p>
+				<p class="textarea">Description: <%= post.description %></p>
 				<hr>
 			</div>
 		<% end %>
