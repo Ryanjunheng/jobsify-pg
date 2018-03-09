@@ -3,7 +3,9 @@
 @import "bootstrap-datepicker3";
 
 .navbar {
-	border: 1px solid black;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	background: ghostwhite;
 	margin-bottom: 0;
 }
 
@@ -22,3 +24,14 @@
 .padding {
 	padding: 3rem;
 }
+
+a, a:visited {
+	text-decoration: none;
+	color: grey;
+}
+
+a:hover, a:active {
+	text-decoration: none;
+	color: black;
+}
+
