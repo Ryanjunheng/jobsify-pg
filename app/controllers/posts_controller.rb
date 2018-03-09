@@ -42,8 +42,16 @@ class PostsController < ApplicationController
 	end
 
 	def apply
-		@post.upvote_by current_user
-		redirect_to user_post_path(@post.user_id, @post.id)
+		if (current_user.voted_for? @post) == false
+			@post.upvote_by current_user
+			flash[:success] = "Job application submitted successfully!"
+			redirect_to user_post_path(@post.user_id, @post.id)
+		elsif (current_user.voted_for? @post) == true
+			respond_to do |format|
+          		format.html { redirect_to user_post_path(@post.user_id, @post.id) }
+          		format.js
+        	end
+        end
 	end
 
 	private

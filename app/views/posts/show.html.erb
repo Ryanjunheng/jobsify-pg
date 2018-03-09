@@ -2,7 +2,7 @@
 	<h1><%= @post.name %></h1>
 	<p>Created by: <%= link_to @post.user.name, user_path(@post.user.id) %> on <%= @post.date %></p>
 	<p>Status: <%= @post.status %></p>
-	<% if current_user.voted_for? @post %>
+	<% if logged_in? and current_user.voted_for? @post %>
 		<p class="text-success">You have applied for this job.</p>
 	<% else %>
 		<p class="text-success"><%= @post.get_upvotes.size %> people has applied for this job.</p>
@@ -19,9 +19,9 @@
 	<p><%= @post.address %>, <%= @post.zipcode %> <%= @post.city %>, <%= @post.state %>, <%= @post.country%>.</p>
 	<br>
 	<% if logged_in? and current_user.jobseeker? %>
-		<%= link_to "Apply now!", apply_user_post_path(current_user.id, @post.id), method: :put, class:"btn btn-success" %>
+		<%= link_to "Apply now!", apply_user_post_path(current_user.id, @post.id), method: :put, remote: true, class:"btn btn-success" %>
 	<% elsif !logged_in? %>
-		<%= link_to "Apply now!", apply_user_post_path(current_user.id, @post.id), method: :put, class:"btn btn-secondary disabled" %>
+		<%= link_to "Apply now!", "", class:"btn btn-success disabled" %>
 		<p>Please sign up/sign in to apply for this job!</p>
 	<% end %>
 </div>
