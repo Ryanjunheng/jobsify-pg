@@ -24,4 +24,17 @@
 		<%= link_to "Apply now!", "", class:"btn btn-success disabled" %>
 		<p>Please sign up/sign in to apply for this job!</p>
 	<% end %>
+	<hr>
+	<% if logged_in? and current_user.id == @post.user_id %>
+		<% if @post.votes_for.up.by_type(User).voters.size != 0 %>
+			<h2>Applicants:</h2><br>
+				<% @post.votes_for.up.by_type(User).voters.each do |applicant| %>
+					<h4>- <%= link_to applicant.name, user_path(applicant.id) %></h4>
+					<hr>
+				<% end %>
+		<% elsif @post.votes_for.up.by_type(User).voters.size == 0 %>
+			<h4>No application yet!</h4>
+		<% end %>
+	<% end %>
+
 </div>

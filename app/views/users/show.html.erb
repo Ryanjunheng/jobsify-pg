@@ -5,6 +5,8 @@
 		<%= link_to "Edit", edit_user_path(@user.id), class:"btn btn-default" %>
 	<% end %>
 	<hr>
+	<h4>Name: <%= @user.name %></h4>
+	<h4>Email: <%= @user.email %></h4>
 	<% if logged_in? and @user.recruiter? %>
 		<% if @user.id == current_user.id %>
 			<h2>Your job posts:</h2>
@@ -53,7 +55,7 @@
 			<% if current_user.find_up_voted_items.size != 0 %>
 				<h2>Your application history:</h2><br>
 				<% current_user.find_up_voted_items.each do |application| %>
-					<h4><%= link_to application.name, user_post_path(application.user_id, application.id) %></h4>
+					<h4>- <%= link_to application.name, user_post_path(application.user_id, application.id) %></h4>
 					<hr>
 				<% end %>
 			<% elsif current_user.find_up_voted_items.size == 0 %>
