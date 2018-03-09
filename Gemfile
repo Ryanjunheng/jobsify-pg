@@ -34,6 +34,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'city-state'
 gem 'bootstrap-datepicker-rails'
 gem 'kaminari'
+gem 'acts_as_votable', '~> 0.11.1'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   root "home#index"
   resources :users do 
-  	resources :posts 
+  	resources :posts do
+      member do 
+        put "apply", to: "posts#apply"
+      end
+    end
   end
 
   get 'cities/:state', to: 'application#cities'

@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-	before_action :find_post, only: [:show, :edit, :update, :destroy]
+	before_action :find_post, only: [:show, :edit, :update, :destroy, :apply]
 	before_action :post_owner_check, only: [:edit, :update, :destroy]
 	before_action :logged_in_check, :recruiter_check, only: [:new] 
 
@@ -39,6 +39,11 @@ class PostsController < ApplicationController
 		@post.destroy
 		flash[:success] = "Job post has been deleted successfully!"
 		redirect_to user_path(current_user.id)
+	end
+
+	def apply
+		@post.upvote_by current_user
+		redirect_to user_post_path(@post.user_id, @post.id)
 	end
 
 	private
