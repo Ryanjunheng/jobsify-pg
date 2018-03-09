@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+	acts_as_votable
 	enum status: [:available, :expired]
 	belongs_to :user
 	validates :name, presence: true, length: { minimum: 3 }
